@@ -11,9 +11,12 @@ function binance_request($endpoint, $params = []) {
     global $api_key, $api_secret, $binance_futures_url;
 
     $timestamp = round(microtime(true) * 1000);
-    echo $timestamp;
+    //echo $timestamp;
     $params['timestamp'] = $timestamp;
-    
+    $params = [
+        'timestamp' => $timestamp,
+        'recvWindow' => 10000 // Increase recvWindow to allow slight delay
+    ];
     $query_string = http_build_query($params);
     $signature = hash_hmac('sha256', $query_string, $api_secret);
     $url = $binance_futures_url . $endpoint . '?' . $query_string . '&signature=' . $signature;
