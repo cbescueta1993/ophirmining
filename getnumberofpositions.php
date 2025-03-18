@@ -11,6 +11,7 @@ function binance_request($endpoint, $params = []) {
     global $api_key, $api_secret, $binance_futures_url;
 
     $timestamp = round(microtime(true) * 1000);
+    echo $timestamp;
     $params['timestamp'] = $timestamp;
     
     $query_string = http_build_query($params);
