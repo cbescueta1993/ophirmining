@@ -46,6 +46,7 @@ if (count($parts) > 1) {
 	$alertSymbol=$parts[0];
 	$alerSide=$parts[1];
 	$tp_percentageTemp=$parts[2];
+    $sl_percentageTemp=$parts[3];
 	
 	$symbol=$alertSymbol;
 	if($side!='BOTH'){
@@ -54,10 +55,12 @@ if (count($parts) > 1) {
 		}else{
 			$side=$alerSide;
 			$tp_percentage=$tp_percentageTemp;
+            $sl_percentage=$sl_percentageTemp;
 		}
 	}else{
 		$side=$alerSide;
 		$tp_percentage=$tp_percentageTemp;
+        $sl_percentage=$sl_percentageTemp;
 	}
 	
 }
@@ -220,8 +223,10 @@ function check_if_symbol_exists($symbol) {
 
         // Find if the symbol exists with an open position
         foreach ($data as $position) {
-            if (isset($position['symbol']) && $position['symbol'] === $symbol && isset($position['positionAmt']) && $position['positionAmt'] != "0") {
-                return true;
+            if (abs(floatval($position['positionAmt'])) > 0) {
+                if ($position['symbol'] === $symbol) {
+                    return true;
+                }
             }
         }
 
@@ -308,12 +313,12 @@ if($TotalMargin<=$amount_usdt_limit_per_day){
 	die("limit per day reach!");
 }
 */
-/*
+
 if(check_if_symbol_exists($symbol)){
 	logTrade("$symbol already exists!");
 	die("already exists!");
 }
-*/
+
 
 // **Step 1: Get Current Market Price**
 //$ticker_response = binance_request('/fapi/v1/ticker/price', ['symbol' => $symbol], 'GET');
@@ -502,7 +507,7 @@ if (isset($sl_response['code'])) {
     die("Stop Loss Error: " . $sl_response['msg']);
 }
 
-$msg= "DONE COIN=".$symbol.";side=".$side.";entry=$entryPrice;tp=$takeProfit;sl=$stopLoss;leverage=$leverage;tp@".($tp_percentage*100)."%;sl@".($sl_percentage*100)."%";
+$msg= "[DONE];COIN=".$symbol.";side=".$side.";entry=$entryPrice;tp=$takeProfit;sl=$stopLoss;leverage=$leverage;tp@".($tp_percentage*100)."%;sl@".($sl_percentage*100)."%";
 echo $msg."\n";
 $end_time = microtime(true); // End time
 $execution_time = $end_time - $start_time; // Calculate execution time

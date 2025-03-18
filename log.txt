@@ -1,0 +1,19 @@
+2025-03-18 02:46:05 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@1%;sl@1%
+2025-03-18 02:46:11 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 02:46:15 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.5249;tp=2.5501;sl=2.4997;leverage=5;tp@1%;sl@1%
+2025-03-18 02:47:32 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@1%;sl@1%
+2025-03-18 02:47:37 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 02:47:40 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.5012;tp=2.5262;sl=2.4762;leverage=5;tp@1%;sl@1%
+2025-03-18 02:53:29 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@3%;sl@1%
+2025-03-18 02:53:38 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 02:53:41 - XRPUSDT;Binance API Error: {"code":-1000,"msg":"An unknown error occurred while processing the request."}
+2025-03-18 02:53:43 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.5168;tp=2.5923;sl=2.4916;leverage=5;tp@3%;sl@1%
+2025-03-18 03:19:38 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@3%;sl@1%
+2025-03-18 03:20:56 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@3%;sl@1%
+2025-03-18 03:21:02 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 03:21:06 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.5249;tp=2.6006;sl=2.4997;leverage=5;tp@3%;sl@1%
+2025-03-18 03:33:32 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@3%;sl@1%
+2025-03-18 03:33:33 - XRPUSDT already exists!
+2025-03-18 03:33:55 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@3%;sl@1%
+2025-03-18 03:34:00 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 03:34:03 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.5012;tp=2.5762;sl=2.4762;leverage=5;tp@3%;sl@1%
