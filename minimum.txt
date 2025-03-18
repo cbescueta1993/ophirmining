@@ -1,0 +1,9 @@
+btc	   10
+xrp             2
+eth	    2
+sol	    12
+trx              4.61
+bnb              2
+SUI	    2
+LINK	    2
+LTC	    6.8
