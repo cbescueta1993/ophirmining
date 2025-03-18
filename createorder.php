@@ -116,8 +116,15 @@ function getTotalMargin(){
         // Get timestamp
         $timestamp = round(microtime(true) * 1000);
 
-        // Create query string
-        $query = "timestamp=$timestamp";
+        
+
+        $params = [
+            'timestamp' => $timestamp,
+            'recvWindow' => 10000 // Increase recvWindow to allow slight delay
+        ];
+        
+        // Convert parameters to query string format
+        $query = http_build_query($params);
 
         // Generate signature
         $signature = hash_hmac('sha256', $query, $api_secret);
@@ -187,7 +194,13 @@ function check_if_symbol_exists($symbol) {
         $timestamp = round(microtime(true) * 1000);
 
         // Create query string
-        $query = "timestamp=$timestamp";
+        $params = [
+            'timestamp' => $timestamp,
+            'recvWindow' => 10000 // Increase recvWindow to allow slight delay
+        ];
+        
+        // Convert parameters to query string format
+        $query = http_build_query($params);
 
         // Generate signature
         $signature = hash_hmac('sha256', $query, $api_secret);
