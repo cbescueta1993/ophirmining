@@ -248,10 +248,6 @@ function binance_request($endpoint, $params = [], $method = 'POST') {
     try {
         $timestamp = round(microtime(true) * 1000);
         $params['timestamp'] = $timestamp;
-        $params = [
-            'timestamp' => $timestamp,
-            'recvWindow' => 10000 // Increase recvWindow to allow slight delay
-        ];
 
         $query_string = http_build_query($params);
         $signature = hash_hmac('sha256', $query_string, $api_secret);
@@ -318,11 +314,11 @@ if($TotalMargin<=$amount_usdt_limit_per_day){
 	die("limit per day reach!");
 }
 */
-
+/*
 if(check_if_symbol_exists($symbol)){
 	logTrade("$symbol already exists!");
 	die("already exists!");
-}
+}*/
 
 
 // **Step 1: Get Current Market Price**

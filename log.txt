@@ -1,0 +1,10 @@
+2025-03-18 16:23:25 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:23:29 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'symbol' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:23:30 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'symbol' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:23:31 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'symbol' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:24:40 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:24:45 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 16:24:47 - XRPUSDT;Binance API Error: {"code":-2019,"msg":"Margin is insufficient."}
+2025-03-18 16:24:50 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:24:55 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 16:24:57 - XRPUSDT;Binance API Error: {"code":-2019,"msg":"Margin is insufficient."}

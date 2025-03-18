@@ -1,6 +1,6 @@
 <?php
 return [
-    'mode' => 'TESTNET',
+    'mode' => 'LIVE',
     'side' => 'BUY',
     'symbol' => 'XRPUSDT',
     'leverage' => 33,
