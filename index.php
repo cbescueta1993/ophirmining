@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="login-container">
+        <h3 class="text-center">Ophirmining</h3>
         <h3 class="text-center">Login</h3>
         <?php if (isset($error)): ?>
             <div class="alert alert-danger"> <?php echo $error; ?> </div>
