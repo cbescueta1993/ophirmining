@@ -248,6 +248,10 @@ function binance_request($endpoint, $params = [], $method = 'POST') {
     try {
         $timestamp = round(microtime(true) * 1000);
         $params['timestamp'] = $timestamp;
+        $params = [
+            'timestamp' => $timestamp,
+            'recvWindow' => 10000 // Increase recvWindow to allow slight delay
+        ];
 
         $query_string = http_build_query($params);
         $signature = hash_hmac('sha256', $query_string, $api_secret);
