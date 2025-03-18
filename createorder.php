@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Manila');
 ignore_user_abort(true); // Allow script to continue if client disconnects
 $start_time = microtime(true); // Start time
 $config = include 'config.php';
