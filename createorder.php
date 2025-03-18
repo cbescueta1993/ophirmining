@@ -223,7 +223,7 @@ function check_if_symbol_exists($symbol) {
 
         // Find if the symbol exists with an open position
         foreach ($data as $position) {
-            if (abs(floatval($position['positionAmt'])) > 0) {
+            if (abs($position['positionAmt']) > 0) {
                 if ($position['symbol'] === $symbol) {
                     return true;
                 }

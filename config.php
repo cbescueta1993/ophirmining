@@ -1,9 +1,9 @@
 <?php
 return [
-    'mode' => 'LIVE',
+    'mode' => 'TESTNET',
     'side' => 'BUY',
     'symbol' => 'XRPUSDT',
-    'leverage' => 5,
+    'leverage' => 33,
     'amount_usdt' => 2,
     'tp_percentage' => 0.01,
     'sl_percentage' => 0.01,
