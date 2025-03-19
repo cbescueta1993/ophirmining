@@ -636,7 +636,8 @@ if (isset($margin_mode_response['code']) && $margin_mode_response['code'] != -40
 	echo "\n";
 }
     */
-
+$timestamp = round(microtime(true) * 1000);
+$callbackRate=3;
 
 // **Step 2: Set Leverage**
 $leverage_response = binance_request('/fapi/v1/leverage', [
@@ -646,14 +647,17 @@ $leverage_response = binance_request('/fapi/v1/leverage', [
     'recvWindow' => 10000 
 ]);
 
+
+
 if (isset($leverage_response['code'])) {
     echo "Leverage Error: " . $leverage_response['msg'];
 	echo "\n";
 }
-$timestamp = round(microtime(true) * 1000);
+
 
 
 // **Step 3: Open Market Long Position**
+
 $order_response = binance_request('/fapi/v1/order', [
     'symbol' => $symbol,
     'side' => $side,
@@ -662,6 +666,24 @@ $order_response = binance_request('/fapi/v1/order', [
     'timestamp' => $timestamp,
     'recvWindow' => 10000 // Increase recvWindow to allow slight delay
 ]);
+
+
+
+$order_response = binance_request('/fapi/v1/order', [
+    'symbol' => $symbol,
+    'side' => $side,
+    'type' => 'TRAILING_STOP_MARKET',
+    'quantity' => $quantity,
+    "activationPrice" => ($side=="BUY")?$stopLoss:$takeProfit,
+    "callbackRate" => $callbackRate, // 3% trailing stop loss
+    'timestamp' => $timestamp,
+    "workingType" => "CONTRACT_PRICE",
+    "priceProtect" => "FALSE",
+    'recvWindow' => 10000 // Increase recvWindow to allow slight delay
+    //,"reduceOnly" => "true"
+]);
+
+
 
 /*$order_response = binance_request('/fapi/v1/order', [
     'symbol' => $symbol,
@@ -686,7 +708,7 @@ $order_id = $order_response['orderId'];
 $tp_sl_side = ($side === 'BUY') ? 'SELL' : 'BUY';
 
 // **Step 4: Set Take Profit (TP)**
-
+/*
 $tp_response = binance_request('/fapi/v1/order', [
 	'orderId' => $order_id,
     'symbol' => $symbol,
@@ -696,6 +718,10 @@ $tp_response = binance_request('/fapi/v1/order', [
     'stopPrice' => $takeProfit,
     'closePosition' => 'true'
 ]);
+if (isset($tp_response['code'])) {
+    die("Take Profit Error: " . $tp_response['msg']);
+}
+*/
 /*
 $tp_response = binance_request('/fapi/v1/order', [
 	'orderId' => $order_id,
@@ -710,12 +736,9 @@ $tp_response = binance_request('/fapi/v1/order', [
 
 //echo "Take Profit: $takeProfit\n";
 
-if (isset($tp_response['code'])) {
-    die("Take Profit Error: " . $tp_response['msg']);
-}
 
 // **Step 5: Set Stop Loss (SL)**
-
+/*
 $sl_response = binance_request('/fapi/v1/order', [
 	'orderId' => $order_id,
     'symbol' => $symbol,
@@ -725,6 +748,11 @@ $sl_response = binance_request('/fapi/v1/order', [
     'stopPrice' => $stopLoss,
     'closePosition' => 'true'
 ]);
+if (isset($sl_response['code'])) {
+    die("Stop Loss Error: " . $sl_response['msg']);
+}
+
+/*
 /*
 $sl_response = binance_request('/fapi/v1/order', [
 	'orderId' => $order_id,
@@ -737,9 +765,6 @@ $sl_response = binance_request('/fapi/v1/order', [
 ]);*/
 
 //echo "Stop Loss: $stopLoss\n";
-if (isset($sl_response['code'])) {
-    die("Stop Loss Error: " . $sl_response['msg']);
-}
 
 $msg= "[DONE];COIN=".$symbol.";side=".$side.";entry=$entryPrice;tp=$takeProfit;sl=$stopLoss;leverage=$leverage;tp@".($tp_percentage*100)."%;sl@".($sl_percentage*100)."%";
 echo $msg."\n";

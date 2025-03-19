@@ -3,7 +3,7 @@ return [
     'mode' => 'LIVE',
     'side' => 'BUY',
     'symbol' => 'XRPUSDT',
-    'leverage' => 1,
+    'leverage' => 5,
     'amount_usdt' => 2,
     'tp_percentage' => 0.01,
     'sl_percentage' => 0.01,

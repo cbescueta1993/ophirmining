@@ -72,3 +72,18 @@
 2025-03-19 09:21:16 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2801;tp=2.3029;sl=2.2573;leverage=2;tp@1%;sl@1%
 2025-03-19 09:32:48 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
 2025-03-19 09:32:56 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2789;tp=2.3017;sl=2.2561;leverage=1;tp@1%;sl@1%
+2025-03-19 09:49:19 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 09:49:29 - XRPUSDT;Binance API Error: {"code":-2007,"msg":"Invalid callBack rate."}
+2025-03-19 09:51:21 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 09:51:27 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2791;tp=2.3019;sl=2.2563;leverage=1;tp@1%;sl@1%
+2025-03-19 09:53:04 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 09:53:09 - XRPUSDT;Binance API Error: {"code":-2021,"msg":"Order would immediately trigger."}
+2025-03-19 09:54:40 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 09:54:45 - XRPUSDT;Binance API Error: {"code":-2021,"msg":"Order would immediately trigger."}
+2025-03-19 09:56:24 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 09:56:41 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 09:56:47 - XRPUSDT;Binance API Error: {"code":-4164,"msg":"Order's notional must be no smaller than 5 (unless you choose reduce only)."}
+2025-03-19 09:57:49 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 09:57:58 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2711;tp=2.2938;sl=2.2484;leverage=1;tp@1%;sl@1%
+2025-03-19 10:03:33 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@1%;sl@1%
+2025-03-19 10:03:43 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2719;tp=2.2946;sl=2.2492;leverage=5;tp@1%;sl@1%
