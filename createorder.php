@@ -621,8 +621,8 @@ echo "\n";
 echo "minQty:".$minQty;
 echo "\n";
 //***********************************end calculate trade param
-$timestamp = round(microtime(true) * 1000);
 
+/*
 // **Step 1: Set Margin Mode to ISOLATED**
 $margin_mode_response = binance_request('/fapi/v1/marginType', [
     'symbol' => $symbol,
@@ -635,6 +635,7 @@ if (isset($margin_mode_response['code']) && $margin_mode_response['code'] != -40
 	echo "already set margin mode to isolated";
 	echo "\n";
 }
+    */
 
 
 // **Step 2: Set Leverage**
@@ -647,7 +648,7 @@ if (isset($leverage_response['code'])) {
     echo "Leverage Error: " . $leverage_response['msg'];
 	echo "\n";
 }
-
+$timestamp = round(microtime(true) * 1000);
 
 
 // **Step 3: Open Market Long Position**
@@ -655,7 +656,9 @@ $order_response = binance_request('/fapi/v1/order', [
     'symbol' => $symbol,
     'side' => $side,
     'type' => 'MARKET',
-    'quantity' => $quantity
+    'quantity' => $quantity,
+    'timestamp' => $timestamp,
+    'recvWindow' => 5000 // Increase recvWindow to allow slight delay
 ]);
 
 /*$order_response = binance_request('/fapi/v1/order', [

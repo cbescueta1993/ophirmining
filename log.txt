@@ -70,3 +70,5 @@
 2025-03-19 09:21:08 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=2;tp@1%;sl@1%
 2025-03-19 09:21:13 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
 2025-03-19 09:21:16 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2801;tp=2.3029;sl=2.2573;leverage=2;tp@1%;sl@1%
+2025-03-19 09:32:48 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 09:32:56 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2789;tp=2.3017;sl=2.2561;leverage=1;tp@1%;sl@1%
