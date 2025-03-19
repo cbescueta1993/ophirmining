@@ -11,3 +11,62 @@
 2025-03-18 16:26:46 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
 2025-03-18 16:26:55 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
 2025-03-18 16:26:56 - XRPUSDT;Binance API Error: {"code":-2019,"msg":"Margin is insufficient."}
+2025-03-18 16:42:26 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:42:31 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'symbol' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:42:32 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'symbol' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:42:33 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'symbol' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:44:56 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:45:05 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'timestamp' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:45:05 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'timestamp' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:45:06 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-18 16:48:39 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:48:44 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'timestamp' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:48:44 - XRPUSDT;Binance API Error: {"code":-1102,"msg":"Mandatory parameter 'timestamp' was not sent, was empty\/null, or malformed."}
+2025-03-18 16:48:45 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-18 16:49:59 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:50:05 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 16:50:07 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-18 16:51:20 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:51:25 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 16:51:27 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-18 16:52:28 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 16:52:36 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 16:52:38 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-18 17:01:35 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 17:01:40 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:01:42 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-18 17:03:47 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@1%;sl@1%
+2025-03-18 17:03:54 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:03:56 - XRPUSDT;Binance API Error: {"code":-2019,"msg":"Margin is insufficient."}
+2025-03-18 17:07:46 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@1%;sl@1%
+2025-03-18 17:07:51 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:07:53 - XRPUSDT;Binance API Error: {"code":-1117,"msg":"Invalid side."}
+2025-03-18 17:07:56 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 17:08:01 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:08:03 - XRPUSDT;Binance API Error: {"code":-1117,"msg":"Invalid side."}
+2025-03-18 17:08:25 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 17:08:30 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:08:32 - XRPUSDT;Binance API Error: {"code":-2019,"msg":"Margin is insufficient."}
+2025-03-18 17:12:16 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@1%;sl@1%
+2025-03-18 17:12:21 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:12:23 - XRPUSDT;Binance API Error: {"code":-2019,"msg":"Margin is insufficient."}
+2025-03-18 17:40:39 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@1%;sl@1%
+2025-03-18 17:40:44 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:40:46 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-18 17:51:48 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@1%;sl@1%
+2025-03-18 17:51:53 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:51:55 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-18 17:53:21 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@3%;sl@1%
+2025-03-18 17:53:26 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-18 17:53:27 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-19 09:11:54 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@1%;sl@1%
+2025-03-19 09:11:56 - XRPUSDT;cURL Error: SSL certificate problem: self-signed certificate in certificate chain
+2025-03-19 09:14:05 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@1%;sl@1%
+2025-03-19 09:14:11 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-19 09:14:12 - XRPUSDT;Binance API Error: {"code":-4061,"msg":"Order's position side does not match user's setting."}
+2025-03-19 09:16:00 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=33;tp@1%;sl@1%
+2025-03-19 09:16:06 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-19 09:16:10 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.5250;tp=2.5503;sl=2.4998;leverage=33;tp@1%;sl@1%
+2025-03-19 09:21:08 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=2;tp@1%;sl@1%
+2025-03-19 09:21:13 - XRPUSDT;Binance API Error: {"code":-4046,"msg":"No need to change margin type."}
+2025-03-19 09:21:16 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2801;tp=2.3029;sl=2.2573;leverage=2;tp@1%;sl@1%

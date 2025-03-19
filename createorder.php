@@ -113,20 +113,10 @@ function getTotalMargin(){
     global $api_key, $binance_futures_url, $api_secret,$symbol;
 
     try {
-        // Get timestamp
         $timestamp = round(microtime(true) * 1000);
-
+        $params['timestamp'] = $timestamp;
         
-
-        $params = [
-            'timestamp' => $timestamp,
-            'recvWindow' => 10000 // Increase recvWindow to allow slight delay
-        ];
-        
-        // Convert parameters to query string format
         $query = http_build_query($params);
-
-        // Generate signature
         $signature = hash_hmac('sha256', $query, $api_secret);
 
         // Final API URL
@@ -190,19 +180,10 @@ function check_if_symbol_exists($symbol) {
     global $api_key, $binance_futures_url, $api_secret;
 
     try {
-        // Get timestamp
         $timestamp = round(microtime(true) * 1000);
-
-        // Create query string
-        $params = [
-            'timestamp' => $timestamp,
-            'recvWindow' => 10000 // Increase recvWindow to allow slight delay
-        ];
+        $params['timestamp'] = $timestamp;
         
-        // Convert parameters to query string format
         $query = http_build_query($params);
-
-        // Generate signature
         $signature = hash_hmac('sha256', $query, $api_secret);
 
         // Final API URL
@@ -261,16 +242,11 @@ function binance_request($endpoint, $params = [], $method = 'POST') {
     try {
         $timestamp = round(microtime(true) * 1000);
         $params['timestamp'] = $timestamp;
-
-        $params = [
-            'timestamp' => $timestamp,
-            'recvWindow' => 10000 // Increase recvWindow to allow slight delay
-        ];
         
+        $query = http_build_query($params);
+        $signature = hash_hmac('sha256', $query, $api_secret);
 
-        $query_string = http_build_query($params);
-        $signature = hash_hmac('sha256', $query_string, $api_secret);
-        $url = $binance_futures_url . $endpoint . '?' . $query_string . '&signature=' . $signature;
+        $url = $binance_futures_url . $endpoint . '?' . $query . '&signature=' . $signature;
 
         $headers = [
             "X-MBX-APIKEY: $api_key"
@@ -319,226 +295,7 @@ function binance_request($endpoint, $params = [], $method = 'POST') {
 }
 
 
-//START HERE ===================================================================<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
 
-if($isactive==0){
-	die("inactive!");
-}
-/*
-$TotalMargin = getTotalMargin();
-if($TotalMargin<=$amount_usdt_limit_per_day){
-	
-}else{
-	logTrade("$symbol limit per day reach!");
-	die("limit per day reach!");
-}
-*/
-/*
-if(check_if_symbol_exists($symbol)){
-	logTrade("$symbol already exists!");
-	die("already exists!");
-}*/
-
-
-// **Step 1: Get Current Market Price**
-//$ticker_response = binance_request('/fapi/v1/ticker/price', ['symbol' => $symbol], 'GET');
-//if (!isset($ticker_response['price'])) {
-//    die("Error fetching market price.");
-//}
-// Get the latest XRPUSDT market price
-$entryPrice = getMarketPrice($symbol);
-
-if (!$entryPrice) {
-	logTrade("$symbol already exists!");
-    die("Error fetching market price.");
-}
-//***************************************end calculate trade param
-
-// Fetch precision, minQty, and minNotional
-$precision = getSymbolPrecision($symbol);
-$precisionDecimal = $precision['price']; // Price precision
-$precisionQty = $precision['qty']; // Quantity precision
-$minQty = $precision['minQty']; // Minimum order quantity
-$minNotional = getDynamicMinNotional($symbol); // Get minimum order value in USDT
-
-// Fetch PERCENT_PRICE filter
-$percentPriceFilter = getPercentPriceFilter($symbol); // Implement this function
-$minAllowedPrice = $percentPriceFilter['minPrice'];
-$maxAllowedPrice = $percentPriceFilter['maxPrice'];
-
-// Calculate TP and SL
-$takeProfit = $side === "BUY" ? $entryPrice * (1 + $tp_percentage) : $entryPrice * (1 - $tp_percentage);
-$stopLoss = $side === "BUY" ? $entryPrice * (1 - $sl_percentage) : $entryPrice * (1 + $sl_percentage);
-
-// **Ensure TP and SL are within Binance’s allowed price range**
-$takeProfit = max($minAllowedPrice, min($takeProfit, $maxAllowedPrice));
-$stopLoss = max($minAllowedPrice, min($stopLoss, $maxAllowedPrice));
-
-// Round TP and SL to the correct precision
-$takeProfit = round($takeProfit, $precisionDecimal);
-$stopLoss = round($stopLoss, $precisionDecimal);
-
-// Compute quantity based on leverage
-$quantity = round((($amount_usdt * $leverage) / $entryPrice), $precisionQty);
-
-// Ensure quantity meets minimum requirements
-if ($quantity < $minQty) {
-    $quantity = $minQty;
-}
-
-// Ensure order meets minNotional (quantity * price >= minNotional)
-$notional = $quantity * $entryPrice;
-if ($notional < $minNotional) {
-    $quantity = round(($minNotional / $entryPrice), $precisionQty); // Adjust quantity to meet minNotional
-}
-
-// Format numbers correctly
-$entryPrice = number_format($entryPrice, $precisionDecimal, '.', '');
-$quantity = number_format($quantity, $precisionQty, '.', '');
-$takeProfit = number_format($takeProfit, $precisionDecimal, '.', '');
-$stopLoss = number_format($stopLoss, $precisionDecimal, '.', '');
-
-
-echo "entryPrice:".$entryPrice;
-echo "\n";
-echo "takeProfit:".$takeProfit;
-echo "\n";
-echo "stopLoss:".$stopLoss;
-echo "\n";
-echo "Quantity:".$quantity;
-echo "\n";
-echo "precisionDecimal:".$precisionDecimal;
-echo "\n";
-echo "precisionQty:".$precisionQty;
-echo "\n";
-echo "minQty:".$minQty;
-echo "\n";
-//***********************************end calculate trade param
-
-
-// **Step 1: Set Margin Mode to ISOLATED**
-$margin_mode_response = binance_request('/fapi/v1/marginType', [
-    'symbol' => $symbol,
-    'marginType' => 'ISOLATED'
-]);
-
-// Ignore error if margin type is already set
-if (isset($margin_mode_response['code']) && $margin_mode_response['code'] != -4046) { 
-    //die("Margin Mode Error: " . $margin_mode_response['msg']);
-	echo "already set margin mode to isolated";
-	echo "\n";
-}
-
-
-// **Step 2: Set Leverage**
-$leverage_response = binance_request('/fapi/v1/leverage', [
-    'symbol' => $symbol,
-    'leverage' => $leverage
-]);
-
-if (isset($leverage_response['code'])) {
-    echo "Leverage Error: " . $leverage_response['msg'];
-	echo "\n";
-}
-
-// **Step 3: Open Market Long Position**
-$order_response = binance_request('/fapi/v1/order', [
-    'symbol' => $symbol,
-    'side' => $side,
-    'type' => 'MARKET',
-    'quantity' => $quantity
-]);
-
-/*$order_response = binance_request('/fapi/v1/order', [
-    'symbol' => $symbol,
-    'side' => $side,
-    'type' => 'LIMIT',
-    'quantity' => $quantity,
-    'price' => $entryPrice, // Adjusted price
-    'timeInForce' => 'GTC'
-]);*/
-
-//echo "Entry Price: $entryPrice\n";
-if (isset($order_response['code'])) {
-    die("Order Error: " . $order_response['msg']);
-}
-
-if (!isset($order_response['orderId'])) {
-	die("Order Error: " . $order_response['msg']);
-}
-
-$order_id = $order_response['orderId'];
-
-$tp_sl_side = ($side === 'BUY') ? 'SELL' : 'BUY';
-
-// **Step 4: Set Take Profit (TP)**
-
-$tp_response = binance_request('/fapi/v1/order', [
-	'orderId' => $order_id,
-    'symbol' => $symbol,
-    'side' => $tp_sl_side,
-    'type' => 'TAKE_PROFIT_MARKET',
-    'quantity' => $quantity,
-    'stopPrice' => $takeProfit,
-    'closePosition' => 'true'
-]);
-/*
-$tp_response = binance_request('/fapi/v1/order', [
-	'orderId' => $order_id,
-    'symbol' => $symbol,
-    'side' => $tp_sl_side,
-    'type' => 'LIMIT',  // Use LIMIT instead
-    'quantity' => $quantity,
-    'price' => $takeProfit,  // Set price instead of stopPrice
-    'timeInForce' => 'GTC'  // Keep the order open
-]);*/
-
-
-//echo "Take Profit: $takeProfit\n";
-
-if (isset($tp_response['code'])) {
-    die("Take Profit Error: " . $tp_response['msg']);
-}
-
-// **Step 5: Set Stop Loss (SL)**
-
-$sl_response = binance_request('/fapi/v1/order', [
-	'orderId' => $order_id,
-    'symbol' => $symbol,
-    'side' => $tp_sl_side,
-    'type' => 'STOP_MARKET',
-    'quantity' => $quantity,
-    'stopPrice' => $stopLoss,
-    'closePosition' => 'true'
-]);
-/*
-$sl_response = binance_request('/fapi/v1/order', [
-	'orderId' => $order_id,
-    'symbol' => $symbol,
-    'side' => $tp_sl_side,
-    'type' => 'LIMIT',  // Change from STOP_MARKET to STOP_LIMIT
-    'quantity' => $quantity,  // Stop price triggers the limit order
-    'price' => $stopLoss,  // Set actual limit price slightly below stop price
-    'timeInForce' => 'GTC'  // Keep order open until filled
-]);*/
-
-//echo "Stop Loss: $stopLoss\n";
-if (isset($sl_response['code'])) {
-    die("Stop Loss Error: " . $sl_response['msg']);
-}
-
-$msg= "[DONE];COIN=".$symbol.";side=".$side.";entry=$entryPrice;tp=$takeProfit;sl=$stopLoss;leverage=$leverage;tp@".($tp_percentage*100)."%;sl@".($sl_percentage*100)."%";
-echo $msg."\n";
-$end_time = microtime(true); // End time
-$execution_time = $end_time - $start_time; // Calculate execution time
-
-echo "Execution Time: " . number_format($execution_time, 4) . " seconds";
-logTrade($msg);
-
-if (isset($_GET['logs'])) {
-    echo file_exists($logFile) ? file_get_contents($logFile) : "No logs yet.";
-    exit;
-}
 // Save trade success message to logs
 function logTrade($message) {
     global $logFile;
@@ -767,5 +524,229 @@ function getPercentPriceFilter($symbol) {
 }
 
 
+
+
+//START HERE ===================================================================<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+if($isactive==0){
+	die("inactive!");
+}
+/*
+$TotalMargin = getTotalMargin();
+if($TotalMargin<=$amount_usdt_limit_per_day){
+	
+}else{
+	logTrade("$symbol limit per day reach!");
+	die("limit per day reach!");
+}
+*/
+/*
+if(check_if_symbol_exists($symbol)){
+	logTrade("$symbol already exists!");
+	die("already exists!");
+}*/
+
+
+// **Step 1: Get Current Market Price**
+//$ticker_response = binance_request('/fapi/v1/ticker/price', ['symbol' => $symbol], 'GET');
+//if (!isset($ticker_response['price'])) {
+//    die("Error fetching market price.");
+//}
+// Get the latest XRPUSDT market price
+$entryPrice = getMarketPrice($symbol);
+
+if (!$entryPrice) {
+	logTrade("$symbol already exists!");
+    die("Error fetching market price.");
+}
+//***************************************end calculate trade param
+
+// Fetch precision, minQty, and minNotional
+$precision = getSymbolPrecision($symbol);
+$precisionDecimal = $precision['price']; // Price precision
+$precisionQty = $precision['qty']; // Quantity precision
+$minQty = $precision['minQty']; // Minimum order quantity
+$minNotional = getDynamicMinNotional($symbol); // Get minimum order value in USDT
+
+// Fetch PERCENT_PRICE filter
+$percentPriceFilter = getPercentPriceFilter($symbol); // Implement this function
+$minAllowedPrice = $percentPriceFilter['minPrice'];
+$maxAllowedPrice = $percentPriceFilter['maxPrice'];
+
+// Calculate TP and SL
+$takeProfit = $side === "BUY" ? $entryPrice * (1 + $tp_percentage) : $entryPrice * (1 - $tp_percentage);
+$stopLoss = $side === "BUY" ? $entryPrice * (1 - $sl_percentage) : $entryPrice * (1 + $sl_percentage);
+
+// **Ensure TP and SL are within Binance’s allowed price range**
+$takeProfit = max($minAllowedPrice, min($takeProfit, $maxAllowedPrice));
+$stopLoss = max($minAllowedPrice, min($stopLoss, $maxAllowedPrice));
+
+// Round TP and SL to the correct precision
+$takeProfit = round($takeProfit, $precisionDecimal);
+$stopLoss = round($stopLoss, $precisionDecimal);
+
+// Compute quantity based on leverage
+$quantity = round((($amount_usdt * $leverage) / $entryPrice), $precisionQty);
+
+// Ensure quantity meets minimum requirements
+if ($quantity < $minQty) {
+    $quantity = $minQty;
+}
+
+// Ensure order meets minNotional (quantity * price >= minNotional)
+$notional = $quantity * $entryPrice;
+if ($notional < $minNotional) {
+    $quantity = round(($minNotional / $entryPrice), $precisionQty); // Adjust quantity to meet minNotional
+}
+
+// Format numbers correctly
+$entryPrice = number_format($entryPrice, $precisionDecimal, '.', '');
+$quantity = number_format($quantity, $precisionQty, '.', '');
+$takeProfit = number_format($takeProfit, $precisionDecimal, '.', '');
+$stopLoss = number_format($stopLoss, $precisionDecimal, '.', '');
+
+
+echo "entryPrice:".$entryPrice;
+echo "\n";
+echo "takeProfit:".$takeProfit;
+echo "\n";
+echo "stopLoss:".$stopLoss;
+echo "\n";
+echo "Quantity:".$quantity;
+echo "\n";
+echo "precisionDecimal:".$precisionDecimal;
+echo "\n";
+echo "precisionQty:".$precisionQty;
+echo "\n";
+echo "minQty:".$minQty;
+echo "\n";
+//***********************************end calculate trade param
+$timestamp = round(microtime(true) * 1000);
+
+// **Step 1: Set Margin Mode to ISOLATED**
+$margin_mode_response = binance_request('/fapi/v1/marginType', [
+    'symbol' => $symbol,
+    'marginType' => 'ISOLATED'
+]);
+
+// Ignore error if margin type is already set
+if (isset($margin_mode_response['code']) && $margin_mode_response['code'] != -4046) { 
+    //die("Margin Mode Error: " . $margin_mode_response['msg']);
+	echo "already set margin mode to isolated";
+	echo "\n";
+}
+
+
+// **Step 2: Set Leverage**
+$leverage_response = binance_request('/fapi/v1/leverage', [
+    'symbol' => $symbol,
+    'leverage' => $leverage
+]);
+
+if (isset($leverage_response['code'])) {
+    echo "Leverage Error: " . $leverage_response['msg'];
+	echo "\n";
+}
+
+
+
+// **Step 3: Open Market Long Position**
+$order_response = binance_request('/fapi/v1/order', [
+    'symbol' => $symbol,
+    'side' => $side,
+    'type' => 'MARKET',
+    'quantity' => $quantity
+]);
+
+/*$order_response = binance_request('/fapi/v1/order', [
+    'symbol' => $symbol,
+    'side' => $side,
+    'type' => 'LIMIT',
+    'quantity' => $quantity,
+    'price' => $entryPrice, // Adjusted price
+    'timeInForce' => 'GTC'
+]);*/
+
+//echo "Entry Price: $entryPrice\n";
+if (isset($order_response['code'])) {
+    die("Order Error: " . $order_response['msg']);
+}
+
+if (!isset($order_response['orderId'])) {
+	die("Order Error: " . $order_response['msg']);
+}
+
+$order_id = $order_response['orderId'];
+
+$tp_sl_side = ($side === 'BUY') ? 'SELL' : 'BUY';
+
+// **Step 4: Set Take Profit (TP)**
+
+$tp_response = binance_request('/fapi/v1/order', [
+	'orderId' => $order_id,
+    'symbol' => $symbol,
+    'side' => $tp_sl_side,
+    'type' => 'TAKE_PROFIT_MARKET',
+    'quantity' => $quantity,
+    'stopPrice' => $takeProfit,
+    'closePosition' => 'true'
+]);
+/*
+$tp_response = binance_request('/fapi/v1/order', [
+	'orderId' => $order_id,
+    'symbol' => $symbol,
+    'side' => $tp_sl_side,
+    'type' => 'LIMIT',  // Use LIMIT instead
+    'quantity' => $quantity,
+    'price' => $takeProfit,  // Set price instead of stopPrice
+    'timeInForce' => 'GTC'  // Keep the order open
+]);*/
+
+
+//echo "Take Profit: $takeProfit\n";
+
+if (isset($tp_response['code'])) {
+    die("Take Profit Error: " . $tp_response['msg']);
+}
+
+// **Step 5: Set Stop Loss (SL)**
+
+$sl_response = binance_request('/fapi/v1/order', [
+	'orderId' => $order_id,
+    'symbol' => $symbol,
+    'side' => $tp_sl_side,
+    'type' => 'STOP_MARKET',
+    'quantity' => $quantity,
+    'stopPrice' => $stopLoss,
+    'closePosition' => 'true'
+]);
+/*
+$sl_response = binance_request('/fapi/v1/order', [
+	'orderId' => $order_id,
+    'symbol' => $symbol,
+    'side' => $tp_sl_side,
+    'type' => 'LIMIT',  // Change from STOP_MARKET to STOP_LIMIT
+    'quantity' => $quantity,  // Stop price triggers the limit order
+    'price' => $stopLoss,  // Set actual limit price slightly below stop price
+    'timeInForce' => 'GTC'  // Keep order open until filled
+]);*/
+
+//echo "Stop Loss: $stopLoss\n";
+if (isset($sl_response['code'])) {
+    die("Stop Loss Error: " . $sl_response['msg']);
+}
+
+$msg= "[DONE];COIN=".$symbol.";side=".$side.";entry=$entryPrice;tp=$takeProfit;sl=$stopLoss;leverage=$leverage;tp@".($tp_percentage*100)."%;sl@".($sl_percentage*100)."%";
+echo $msg."\n";
+$end_time = microtime(true); // End time
+$execution_time = $end_time - $start_time; // Calculate execution time
+
+echo "Execution Time: " . number_format($execution_time, 4) . " seconds";
+logTrade($msg);
+
+if (isset($_GET['logs'])) {
+    echo file_exists($logFile) ? file_get_contents($logFile) : "No logs yet.";
+    exit;
+}
 
 ?>
