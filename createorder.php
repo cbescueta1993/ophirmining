@@ -641,7 +641,9 @@ if (isset($margin_mode_response['code']) && $margin_mode_response['code'] != -40
 // **Step 2: Set Leverage**
 $leverage_response = binance_request('/fapi/v1/leverage', [
     'symbol' => $symbol,
-    'leverage' => $leverage
+    'leverage' => $leverage,
+    'timestamp' => $timestamp,
+    'recvWindow' => 10000 
 ]);
 
 if (isset($leverage_response['code'])) {
@@ -658,7 +660,7 @@ $order_response = binance_request('/fapi/v1/order', [
     'type' => 'MARKET',
     'quantity' => $quantity,
     'timestamp' => $timestamp,
-    'recvWindow' => 5000 // Increase recvWindow to allow slight delay
+    'recvWindow' => 10000 // Increase recvWindow to allow slight delay
 ]);
 
 /*$order_response = binance_request('/fapi/v1/order', [
