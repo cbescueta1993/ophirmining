@@ -637,7 +637,7 @@ if (isset($margin_mode_response['code']) && $margin_mode_response['code'] != -40
 }
     */
 $timestamp = round(microtime(true) * 1000);
-$callbackRate=3;
+$callbackRate=1.5;
 
 // **Step 2: Set Leverage**
 $leverage_response = binance_request('/fapi/v1/leverage', [
