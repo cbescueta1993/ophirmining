@@ -637,7 +637,7 @@ if (isset($margin_mode_response['code']) && $margin_mode_response['code'] != -40
 }
     */
 $timestamp = round(microtime(true) * 1000);
-$callbackRate=1.5;
+$callbackRate=1;
 
 // **Step 2: Set Leverage**
 $leverage_response = binance_request('/fapi/v1/leverage', [
@@ -654,6 +654,7 @@ if (isset($leverage_response['code'])) {
 	echo "\n";
 }
 
+usleep(500000); // 500ms delay
 
 
 // **Step 3: Open Market Long Position**
@@ -667,7 +668,7 @@ $order_response = binance_request('/fapi/v1/order', [
     'recvWindow' => 10000 // Increase recvWindow to allow slight delay
 ]);
 
-
+usleep(500000); // 500ms delay
 
 $order_response = binance_request('/fapi/v1/order', [
     'symbol' => $symbol,
@@ -738,7 +739,7 @@ $tp_response = binance_request('/fapi/v1/order', [
 
 
 // **Step 5: Set Stop Loss (SL)**
-/*
+
 $sl_response = binance_request('/fapi/v1/order', [
 	'orderId' => $order_id,
     'symbol' => $symbol,
@@ -752,7 +753,7 @@ if (isset($sl_response['code'])) {
     die("Stop Loss Error: " . $sl_response['msg']);
 }
 
-/*
+
 /*
 $sl_response = binance_request('/fapi/v1/order', [
 	'orderId' => $order_id,

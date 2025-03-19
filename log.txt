@@ -87,3 +87,23 @@
 2025-03-19 09:57:58 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2711;tp=2.2938;sl=2.2484;leverage=1;tp@1%;sl@1%
 2025-03-19 10:03:33 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@1%;sl@1%
 2025-03-19 10:03:43 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2719;tp=2.2946;sl=2.2492;leverage=5;tp@1%;sl@1%
+2025-03-19 10:10:33 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=5;tp@1%;sl@1%
+2025-03-19 10:10:44 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.2718;tp=2.2945;sl=2.2491;leverage=5;tp@1%;sl@1%
+2025-03-19 10:21:01 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 10:21:02 - XRPUSDT;cURL Error: SSL certificate problem: self-signed certificate in certificate chain
+2025-03-19 10:21:05 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 10:21:11 - XRPUSDT;Binance API Error: {"code":-4161,"msg":"Leverage reduction is not supported in Isolated Margin Mode with open positions."}
+2025-03-19 10:21:14 - XRPUSDT;Binance API Error: {"code":-2021,"msg":"Order would immediately trigger."}
+2025-03-19 10:21:40 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 10:21:50 - XRPUSDT;Binance API Error: {"code":-2019,"msg":"Margin is insufficient."}
+2025-03-19 10:23:21 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=1;tp@1%;sl@1%
+2025-03-19 10:23:29 - XRPUSDT;Binance API Error: {"code":-4164,"msg":"Order's notional must be no smaller than 5 (unless you choose reduce only)."}
+2025-03-19 10:23:30 - XRPUSDT;Binance API Error: {"code":-2021,"msg":"Order would immediately trigger."}
+2025-03-19 10:24:12 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=10;tp@1%;sl@1%
+2025-03-19 10:24:20 - XRPUSDT;Binance API Error: {"code":-1008,"msg":"Server is currently overloaded with other requests. Please try again in a few minutes."}
+2025-03-19 10:24:50 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=10;tp@1%;sl@1%
+2025-03-19 10:24:58 - XRPUSDT;Binance API Error: {"code":-1008,"msg":"Server is currently overloaded with other requests. Please try again in a few minutes."}
+2025-03-19 10:29:30 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=10;tp@1%;sl@1%
+2025-03-19 10:29:49 - XRPUSDT;Binance API Error: {"code":-2021,"msg":"Order would immediately trigger."}
+2025-03-19 10:31:28 - ON PROCESS COIN=XRPUSDT;side=BUY;leverage=10;tp@1%;sl@1%
+2025-03-19 10:31:38 - [DONE];COIN=XRPUSDT;side=BUY;entry=2.5009;tp=2.5259;sl=2.4759;leverage=10;tp@1%;sl@1%
